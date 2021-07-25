@@ -9,18 +9,18 @@ public class Trie {
 	public Trie() {
 		root = new TrieNode('\0');//Here we have set its value as null
 	}
-	
+
 	class TrieNode{//This class has been made in order to store all the individual letters
 		public char b;
 		public boolean isEndWord; //This Boolean will tell us where the word ends in the Trie
 		public TrieNode[] children;//This array will store all 26 children
-		
+
 		public TrieNode(char b) {
 			this.b=b;
 			isEndWord = false;//At the beginning we will initialize it to be zero
 			children = new TrieNode[26];//We will initialize the array to have a size of 26
 		}}
-	
+
 	public void insert(String word) {
 		TrieNode curr = root;//This curr node will help us to keep track of where we are currently are when we are traversing the trie.
 		for(int i = 0; i < word.length(); i++) {//This will loop over all our characters
@@ -32,22 +32,22 @@ public class Trie {
 		}
 		curr.isEndWord = true;//We have set the value as true here to signify that the word has ended
 	}
-private TrieNode getNode(String word) {//Helper function. This will return the very last node in the word we are looking for
-	TrieNode curr = root;
-	for (int i = 0; i < word.length(); i++) {
-		char b = word.charAt(i);
-		if (curr.children[b - 'a'] == null) {//This will check whether the node is even created at char b
-			return  null;//If its not created then we just return null meaning we can't move forward
+	private TrieNode getNode(String word) {//Helper function. This will return the very last node in the word we are looking for
+		TrieNode curr = root;
+		for (int i = 0; i < word.length(); i++) {
+			char b = word.charAt(i);
+			if (curr.children[b - 'a'] == null) {//This will check whether the node is even created at char b
+				return  null;//If its not created then we just return null meaning we can't move forward
+			}
+			curr = curr.children[b - 'a'];
 		}
-		curr = curr.children[b - 'a'];
-		}
-	return curr;//We will return curr since its the very last node in the word
-}
+		return curr;//We will return curr since its the very last node in the word
+	}
 
-public boolean search(String word) {
-	TrieNode node = getNode(word);//We are searching whether that specific word is inside of our Trie
-	return node != null && node.isEndWord;//The first condition is important since getNode can return null
-}
+	public boolean search(String word) {
+		TrieNode node = getNode(word);//We are searching whether that specific word is inside of our Trie
+		return node != null && node.isEndWord;//The first condition is important since getNode can return null
+	}
 
 	public static void main(String[] args) throws Exception {
 		Trie root1 = new Trie();
@@ -55,7 +55,7 @@ public boolean search(String word) {
 		while (scan.hasNext()) {
 			root1.insert(scan.next());
 		}
-		
 
-}
+
 	}
+}
